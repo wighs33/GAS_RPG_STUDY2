@@ -19,7 +19,12 @@ class GAS_RPG_STUDY2_API UBaseActorAttributes : public UAttributeSet
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Base Actor Attributes")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Base Actor Attributes", ReplicatedUsing = OnRep_Health)
 	FGameplayAttributeData Health;
 	ATTRIBUTE_ACCESSORS(UBaseActorAttributes, Health)
+
+	UFUNCTION()
+	virtual void OnRep_Health(const FGameplayAttributeData& OldHealth);
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 };
