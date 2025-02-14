@@ -21,8 +21,20 @@ void APanCharacter::BeginPlay()
 	if (IsValid(AbilitySystemComponent))
 	{
 		BaseActorAttributes = AbilitySystemComponent->GetSet<UBaseActorAttributes>();
+
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(BaseActorAttributes->GetHealthAttribute()).AddUObject(this, &APanCharacter::HealthChanged);
 	}
 	
+}
+
+void APanCharacter::HealthChanged(const FOnAttributeChangeData& Data)
+{
+	float Health = Data.NewValue;
+	UpdateHealth(Health);
+}
+
+void APanCharacter::UpdateHealth_Implementation(const float NewHealth)
+{
 }
 
 // Called every frame
@@ -38,4 +50,3 @@ void APanCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
-
