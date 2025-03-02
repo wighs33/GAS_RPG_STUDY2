@@ -23,8 +23,15 @@ public:
 	FGameplayAttributeData Health;
 	ATTRIBUTE_ACCESSORS(UBaseActorAttributes, Health)
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Base Actor Attributes", ReplicatedUsing = OnRep_Stamina)
+	FGameplayAttributeData Stamina;
+	ATTRIBUTE_ACCESSORS(UBaseActorAttributes, Stamina)
+
 	UFUNCTION()
 	virtual void OnRep_Health(const FGameplayAttributeData& OldHealth);
+
+	UFUNCTION()
+	virtual void OnRep_Stamina(const FGameplayAttributeData& OldStamina);
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 };

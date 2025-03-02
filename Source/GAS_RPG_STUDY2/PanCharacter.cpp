@@ -23,6 +23,7 @@ void APanCharacter::BeginPlay()
 		BaseActorAttributes = AbilitySystemComponent->GetSet<UBaseActorAttributes>();
 
 		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(BaseActorAttributes->GetHealthAttribute()).AddUObject(this, &APanCharacter::HealthChanged);
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(BaseActorAttributes->GetStaminaAttribute()).AddUObject(this, &APanCharacter::StaminaChanged);
 	}
 	
 }
@@ -33,7 +34,17 @@ void APanCharacter::HealthChanged(const FOnAttributeChangeData& Data)
 	UpdateHealth(Health);
 }
 
+void APanCharacter::StaminaChanged(const FOnAttributeChangeData& Data)
+{
+	float Stamina = Data.NewValue;
+	UpdateStamina(Stamina);
+}
+
 void APanCharacter::UpdateHealth_Implementation(const float NewHealth)
+{
+}
+
+void APanCharacter::UpdateStamina_Implementation(const float NewStamina)
 {
 }
 

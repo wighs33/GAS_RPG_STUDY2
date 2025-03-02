@@ -27,9 +27,13 @@ protected:
 	UAbilitySystemComponent* AbilitySystemComponent;
 
 	virtual void HealthChanged(const FOnAttributeChangeData& Data);
+	virtual void StaminaChanged(const FOnAttributeChangeData& Data);
 
 	UFUNCTION(BlueprintNativeEvent, Category = "Base Actor Attributes")
 	void UpdateHealth(const float NewHealth);
+
+	UFUNCTION(BlueprintNativeEvent, Category = "Base Actor Attributes")
+	void UpdateStamina(const float NewStamina);
 
 public:	
 	// Called every frame
