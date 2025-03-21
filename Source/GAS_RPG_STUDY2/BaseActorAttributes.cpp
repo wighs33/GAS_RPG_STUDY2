@@ -14,10 +14,27 @@ void UBaseActorAttributes::OnRep_Stamina(const FGameplayAttributeData& OldStamin
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UBaseActorAttributes, Stamina, OldStamina);
 }
 
+void UBaseActorAttributes::OnRep_Defence(const FGameplayAttributeData& OldDefence)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UBaseActorAttributes, Defence, OldDefence);
+}
+
 void UBaseActorAttributes::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME_CONDITION_NOTIFY(UBaseActorAttributes, Health, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UBaseActorAttributes, Stamina, COND_None, REPNOTIFY_Always);
+}
+
+void UBaseActorAttributes::PreAttributeChange(const FGameplayAttribute& Attribute, float& Delta)
+{
+	Super::PreAttributeChange(Attribute, Delta);
+
+	if (Attribute == GetHealthAttribute())
+	{
+		float Def = FMath::Clamp(Defence.GetCurrentValue(), 0.f, 100.f);
+		Delta = Delta * (200 - Def) / 200;
+		UE_LOG(LogTemp, Warning, TEXT("Defence : %f"), Def);
+	}
 }
