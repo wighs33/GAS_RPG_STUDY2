@@ -24,6 +24,7 @@ void APanCharacter::BeginPlay()
 
 		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(BaseActorAttributes->GetHealthAttribute()).AddUObject(this, &APanCharacter::HealthChanged);
 		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(BaseActorAttributes->GetStaminaAttribute()).AddUObject(this, &APanCharacter::StaminaChanged);
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(BaseActorAttributes->GetXPPointsAttribute()).AddUObject(this, &APanCharacter::XPPointsChanged);
 	}
 	
 }
@@ -40,6 +41,12 @@ void APanCharacter::StaminaChanged(const FOnAttributeChangeData& Data)
 	UpdateStamina(Stamina);
 }
 
+void APanCharacter::XPPointsChanged(const FOnAttributeChangeData& Data)
+{
+	float XPPoints = Data.NewValue;
+	UpdateXPPoints(XPPoints);
+}
+
 void APanCharacter::UpdateHealth_Implementation(const float NewHealth)
 {
 }
@@ -47,6 +54,11 @@ void APanCharacter::UpdateHealth_Implementation(const float NewHealth)
 void APanCharacter::UpdateStamina_Implementation(const float NewStamina)
 {
 }
+
+void APanCharacter::UpdateXPPoints_Implementation(const float NewXPPoints)
+{
+}
+
 
 // Called every frame
 void APanCharacter::Tick(float DeltaTime)

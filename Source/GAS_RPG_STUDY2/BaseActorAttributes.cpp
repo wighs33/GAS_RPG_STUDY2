@@ -19,6 +19,11 @@ void UBaseActorAttributes::OnRep_Defence(const FGameplayAttributeData& OldDefenc
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UBaseActorAttributes, Defence, OldDefence);
 }
 
+void UBaseActorAttributes::OnRep_XPPoints(const FGameplayAttributeData& OldXPPoints)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UBaseActorAttributes, XPPoints, OldXPPoints);
+}
+
 void UBaseActorAttributes::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);

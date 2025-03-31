@@ -34,6 +34,11 @@ public:
 	FGameplayAttributeData Defence;
 	ATTRIBUTE_ACCESSORS(UBaseActorAttributes, Defence)
 
+	// XPPoints 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Base Actor Attributes", ReplicatedUsing = OnRep_XPPoints)
+	FGameplayAttributeData XPPoints;
+	ATTRIBUTE_ACCESSORS(UBaseActorAttributes, XPPoints)
+
 	UFUNCTION()
 	virtual void OnRep_Health(const FGameplayAttributeData& OldHealth);
 
@@ -42,6 +47,9 @@ public:
 					
 	UFUNCTION()
 	virtual void OnRep_Defence(const FGameplayAttributeData& OldDefence);
+
+	UFUNCTION()
+	virtual void OnRep_XPPoints(const FGameplayAttributeData& OldXPPoints);
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
